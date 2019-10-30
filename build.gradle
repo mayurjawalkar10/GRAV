@@ -14,13 +14,17 @@ repositories {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
-    compile files('F:/Program Files/GRAV/jar/py4j0.10.8.1.jar')
-    compile files('C:/Users/mayur/Downloads/Softwares/gs-algo-1.3/gs-algo-1.3/gs-algo-1.3.jar',
-            'C:/Users/mayur/Downloads/Softwares/gs-algo-1.3/gs-algo-1.3/gs-algo-1.3-javadoc.jar',
-            'C:/Users/mayur/Downloads/Softwares/gs-algo-1.3/gs-algo-1.3/gs-algo-1.3-sources.jar',
-            'C:/Users/mayur/Downloads/Softwares/gs-core-1.3/gs-core-1.3/gs-core-1.3.jar',
-            'C:/Users/mayur/Downloads/Softwares/gs-core-1.3/gs-core-1.3/gs-core-1.3-javadoc.jar',
-            'C:/Users/mayur/Downloads/Softwares/gs-core-1.3/gs-core-1.3/gs-core-1.3-sources.jar')
+
+    // py4j jar for java <-> python interaction
+    compile files('jar/py4j0.10.8.1.jar')
+
+    // graphstream library jars for visualization
+    compile files('jar/gs-algo-1.3/gs-algo-1.3.jar',
+            'jar/gs-algo-1.3/gs-algo-1.3-javadoc.jar',
+            'jar/gs-algo-1.3/gs-algo-1.3-sources.jar',
+            'jar/gs-core-1.3/gs-core-1.3.jar',
+            'jar/gs-core-1.3-javadoc.jar',
+            'jar/gs-core-1.3-sources.jar')
 }
 
 intellij {
