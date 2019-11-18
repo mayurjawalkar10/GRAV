@@ -1,29 +1,28 @@
-import android.widget.LinearLayout;
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.HashMap;
 import java.util.Scanner;
-//-----------------------------------
+
+// Imports for graphstream
 import org.graphstream.graph.Edge;
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.Node;
 import org.graphstream.graph.implementations.SingleGraph;
 import org.graphstream.ui.swingViewer.ViewPanel;
 import org.graphstream.ui.view.Viewer;
-//----------------------------------
+
 
 public class GRAV_Window{
     JPanel graphPanel;
     HashMap<String, GRAV_Node> nodeList;
-    Graph graph = new SingleGraph("Tutorial", false, true);
+    Graph graph;
 
     public GRAV_Window(){
         // My initializations
         graphPanel = new JPanel();
         graphPanel.setLayout(new GridLayout());
         graphPanel.setVisible(true);
-
+        graph = new SingleGraph("Tutorial", false, true);
         // graph nodes
         nodeList = new HashMap<String,GRAV_Node>();
     }
@@ -70,6 +69,30 @@ public class GRAV_Window{
         }
     }
 
+    public void markChecked(String id){
+        markNode(id, "checked", true);
+    }
+
+    public void unMarkChecked(String id){
+        markNode(id, "checked", false);
+    }
+
+    public void markVisited(String id){
+        markNode(id, "visited", true);
+    }
+
+    public void unMarkVisited(String id){
+        markNode(id, "visited", false);
+    }
+
+    public void highlightNode(String id){
+        highlightNode(id, true);
+    }
+
+    public void unHighlightNode(String id){
+        highlightNode(id, false);
+    }
+
     public JPanel displayGraph(){
         graphPanel.removeAll();
         Viewer viewer = new Viewer(graph, Viewer.ThreadingModel.GRAPH_IN_GUI_THREAD);
@@ -81,16 +104,23 @@ public class GRAV_Window{
 
     public void addEdge(String src, String dest, int cost){
         if(!nodeList.containsKey(src)){
-            nodeList.put(src, new GRAV_Node(src));
+            addNode(src);
         }
         if(!nodeList.containsKey(dest)){
-            nodeList.put(dest, new GRAV_Node(dest));
+            addNode(dest);
         }
         nodeList.get(src).add_neighbour(nodeList.get(dest), cost);
-        // ------------------------------------------------------------------
+        System.out.println("Adding edge");
+
         Edge e = graph.addEdge(src + dest, (Node) graph.getNode(src), (Node) graph.getNode(dest));
+        System.out.println(e);
         e.addAttribute("ui.label", e.getId());
         e.addAttribute("ui.style", "text-size:20px;");
+    }
+
+    public void init(){
+        graph = new SingleGraph("Tutorial", false, true);
+        nodeList = new HashMap<String,GRAV_Node>();
     }
 
     public JPanel getContent(){
@@ -99,10 +129,11 @@ public class GRAV_Window{
 
     public static void main(String args[]) throws InterruptedException {
         GRAV_Window obj = new GRAV_Window();
-        obj.addNode("A");
-        obj.addNode("C");
-        obj.addNode("B");
-        obj.addEdge("A", "B", 5);
+//        obj.addNode("A");
+//        obj.addNode("C");
+//        obj.addNode("B");
+        String a = "A";
+        obj.addEdge(a, "B", 5);
         obj.addEdge("C", "B", 2);
         obj.addEdge("A", "C", 3);
         JFrame j = new JFrame("GRAV");
@@ -117,12 +148,14 @@ public class GRAV_Window{
 //        j.add(obj.displayGraph());
 //        j.setVisible(true);
         sc.nextInt();
-        obj.markNode("A", "checked", true );
+//        obj.markNode("A", "checked", true );
+        obj.markChecked("A");
         obj.highlightNode("A", true);
         j.add(obj.displayGraph());
         j.setVisible(true);
         sc.nextInt();
-        obj.markNode("A", "visited", true );
+//        obj.markNode("A", "visited", true );
+        obj.markVisited("A");
         obj.highlightNode("A", false);
         j.add(obj.displayGraph());
         j.setVisible(true);
@@ -134,7 +167,6 @@ enum Marker{
 }
 
 class GRAV_Node{
-    // int x, y;
     String id;
 
     HashMap<Marker, Boolean> mark;
@@ -142,8 +174,6 @@ class GRAV_Node{
     HashMap<GRAV_Node, Integer> neighbour;
 
     public GRAV_Node(String name){
-        // this.x = 30;
-        // this.y = 30;
         this.id = name;
         this.mark = new HashMap<>();
         this.mark.put(Marker.checked, false);
@@ -153,12 +183,6 @@ class GRAV_Node{
 
     public void add_neighbour(GRAV_Node nbr_ID, int cost){
         neighbour.put(nbr_ID,cost);
+        System.out.println("neighbour added");
     }
-
-//    public void paint(Graphics g) {
-//        g.setColor(Color.RED);
-//        g.drawOval(30, 30, 20, 20);
-//        g.drawString(id, 30, 30);
-//        g.drawLine(50, 50, 100, 100);
-//    }
 }
