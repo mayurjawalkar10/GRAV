@@ -1,18 +1,15 @@
 <idea-plugin>
     <id>graphplugin.GRAV</id>
     <name>GRAV</name>
-    <vendor email="mj8628@rit.edu" url="http://www.rit.edu">RIT</vendor>
+    <vendor email="mj8628@rit.edu" url="https://github.com/mayurjawalkar10/GRAV">RIT</vendor>
 
     <description>The graph visualization plugin for pycharm</description>
 
-    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
-         on how to target different products -->
-    <!-- uncomment to enable plugin in all products
-    <depends>com.intellij.modules.lang</depends>
-    -->
+    <depends>com.intellij.modules.xdebugger</depends>
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.python</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <!-- Add your extensions here -->
         <toolWindow id="GRAV Window" secondary="true" anchor="right" factoryClass="GRAVToolWindowFactory"/>
     </extensions>
 
@@ -20,3 +17,4 @@
         <!-- Add your actions here -->
     </actions>
 </idea-plugin>
+

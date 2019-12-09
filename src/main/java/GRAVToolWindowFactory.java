@@ -20,7 +20,6 @@ public class GRAVToolWindowFactory implements ToolWindowFactory {
         ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();
         Content content = contentFactory.createContent(graph_window.getContent(), "Graph Visualization", false);
         toolWindow.getContentManager().addContent(content);
-
     }
 }
 
