@@ -16,6 +16,19 @@ This tool provides various features for creating and visualizing the graphs. The
 1. GraphStream
 2. py4j for java
 
+# Steps to create jar file for the plugin:
+1. import the project in intellij.
+2. open gradle window.
+3. GRAV --> Tasks --> Build --> jar (Build the jar)
+4. Above step will create the 'GRAV-1.0-SNAPSHOT.jar' file under the following directory.
+   ([ProjectPath]/build/libs)
+   
+# Steps to install plugin in Pycharm:
+1. open settings --> Plugin.
+2. click on the setting icon on the upper right corner. 
+3. select install plugin from disk.
+4. select the generated jar file from the above process.
+5. restart the pycharm IDE.
 
 # Functions and its usage:
 1. void init() - 
